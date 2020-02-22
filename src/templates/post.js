@@ -4,6 +4,7 @@ import { HelmetDatoCms } from 'gatsby-source-datocms'
 import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import Layout from "../components/layout"
+import HyvorTalk from 'hyvor-talk-react'
 
 export default ({ data }) => (
   <Layout>
@@ -29,9 +30,13 @@ export default ({ data }) => (
           <Img fluid={data.datoCmsWork.coverImage.fluid} />
         </div>
       </div>
+        <div className="sheet__inner sheet__inner--comments">
+            <HyvorTalk.Embed websiteId={234} id={data.datoCmsWork.id} />
+        </div>
     </article>
   </Layout>
 )
+
 
 export const query = graphql`
   query WorkQuery($slug: String!) {
@@ -39,6 +44,7 @@ export const query = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
+      id
       title
       excerpt
       gallery {
