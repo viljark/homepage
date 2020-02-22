@@ -5,6 +5,7 @@ import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import Layout from "../components/layout"
 import HyvorTalk from 'hyvor-talk-react'
+import {formatDate} from "../utils/formatters";
 
 export default ({ data }) => (
   <Layout>
@@ -12,6 +13,7 @@ export default ({ data }) => (
       <HelmetDatoCms seo={data.datoCmsWork.seoMetaTags} />
       <div className="sheet__inner">
         <h1 className="sheet__title">{data.datoCmsWork.title}</h1>
+        <p className="sheet__date">{formatDate(data.datoCmsWork.meta.createdAt)}</p>
         <p className="sheet__lead">{data.datoCmsWork.excerpt}</p>
         <div className="sheet__slider">
           <Slider infinite={true} slidesToShow={2} arrows>
@@ -51,6 +53,9 @@ export const query = graphql`
         fluid(maxWidth: 200, imgixParams: { fm: "jpg", auto: "compress" }) {
           src
         }
+      }
+      meta {
+        createdAt
       }
       descriptionNode {
         childMarkdownRemark {
